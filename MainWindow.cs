@@ -29,18 +29,12 @@ namespace GTKApp
 
         private void Button1_Clicked(object sender, EventArgs a)
         {
-            // create a new button
-            var button = new Button("btnTest");
-            button.Clicked += btnTest_Clicked;
-            button.Show();
-            MainBox.Add(button);
+            var myWindow = new MyWindow();
+            myWindow.Show();
+            MainBox.Add(myWindow);
+
             _counter++;
             _label1.Text = "Hello World! This button has been clicked " + _counter + " time(s).";
         }
-
-        private void btnTest_Clicked(object sender, EventArgs a)
-        {
-        }
-
     }
 }
