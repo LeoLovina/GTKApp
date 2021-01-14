@@ -9,6 +9,7 @@ namespace GTKApp
         [UI] private Label _label1 = null;
         [UI] private Button _button1 = null;
 
+        [UI] private Box MainBox = null;
         private int _counter;
 
         public MainWindow() : this(new Builder("MainWindow.glade")) { }
@@ -28,8 +29,18 @@ namespace GTKApp
 
         private void Button1_Clicked(object sender, EventArgs a)
         {
+            // create a new button
+            var button = new Button("btnTest");
+            button.Clicked += btnTest_Clicked;
+            button.Show();
+            MainBox.Add(button);
             _counter++;
             _label1.Text = "Hello World! This button has been clicked " + _counter + " time(s).";
         }
+
+        private void btnTest_Clicked(object sender, EventArgs a)
+        {
+        }
+
     }
 }
