@@ -35,9 +35,13 @@ namespace GTKApp
 
         private void btnTest_clicked(object sender, EventArgs a)
         {
-            var myWindow = new MyWindow();
-            myWindow.Show();
-            MainBox.Add(myWindow);
+
+            var myDialog = new MyDialog();
+            myDialog.Show();
+            MainBox.Add(myDialog);
+            // var myWindow = new MyWindow();
+            // myWindow.Show();
+            // MainBox.Add(myWindow);
 
             // _counter++;
             // _label1.Text = "Hello World! This button has been clicked " + _counter + " time(s).";

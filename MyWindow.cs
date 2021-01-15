@@ -11,6 +11,10 @@ namespace GTKApp
 
         [UI] private Box MainBox = null;
         [UI] private Statusbar myStatusbar = null;
+
+        [UI] private MenuButton mbtnMenuButton = null;
+
+        [UI] private Button btnDialog = null;
         private int _counter;
         private uint timeoutHandler;
 
@@ -23,8 +27,28 @@ namespace GTKApp
             DeleteEvent += Window_DeleteEvent;
             _button1.Clicked += Button1_Clicked;
 
+            btnDialog.Clicked += btnDialog_clicked;
+
             // create a timer to update status bar
             timeoutHandler = GLib.Timeout.Add(1000, new GLib.TimeoutHandler(UpdateStatus));
+
+            // var menuButton = new Gtk.MenuButton();
+            // menuButton.SetSizeRequest(80,35);
+
+            // var menumodel = new Gtk.MenuItem();
+            // menumodel.Label = "menu item";
+            // menumodel.Activated += mbtnMenuButton_clicked;
+            // menuButton.Add(menumodel);
+            // menuButton.Show();
+            // MainBox.Add(menuButton);
+
+            // setup mbtnMenuButton
+            // a menu with two actions
+            //var menumodel = new Gio.Menu();
+            // menumodel.Add("New", "app.new");
+            // menumodel.Append("About", "win.about");
+
+            // mbtnMenuButton.
         }
 
         private bool UpdateStatus()
@@ -71,5 +95,35 @@ namespace GTKApp
                 Console.WriteLine($"Name = {child.Name}");
             }
         }
+
+        private void mbtnMenuButton_clicked(object sender, EventArgs a)
+        {
+            Console.WriteLine("mbtnMenuButton_clicked");
+        }
+
+        private void btnDialog_clicked(object sender, EventArgs a)
+        {
+            using (var dialog = new Gtk.Dialog("This is a dialog",
+                                         this,
+                                         DialogFlags.Modal
+                                         , Gtk.Stock.Open))
+            {
+                dialog.AddButton("Cancel", ResponseType.Cancel);
+                dialog.AddButton("Ok", ResponseType.Ok);
+                dialog.SetSizeRequest(400, 200);
+
+                var checkbox = new Gtk.CheckButton("This is a checkbox");
+                checkbox.Show();
+                var lable = new Gtk.Label("NIce label");
+                lable.Show();
+                
+                dialog.ContentArea.Add(lable);
+                // dialog.ActionArea.PackStart(checkbox, false, false, 0);
+                //dialog.ActionArea.PackEnd(checkbox, false, false,0);
+                var response = dialog.Run();
+                Console.WriteLine($"btnDialog_clicked response={response}");
+            }
+        }
+
     }
 }
