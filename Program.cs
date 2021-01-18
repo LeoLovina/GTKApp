@@ -13,11 +13,18 @@ namespace GTKApp
             var app = new Application("org.GTKApp.GTKApp", GLib.ApplicationFlags.None);
             app.Register(GLib.Cancellable.Current);
 
+            // setup global handler 
+            GLib.ExceptionManager.UnhandledException +=  OnGlobalException;
             var win = new MainWindow();
             app.AddWindow(win);
 
             win.Show();
             Application.Run();
+        }
+
+        static void OnGlobalException (GLib.UnhandledExceptionArgs args)
+        {
+            Console.Write("OnGlobalException");
         }
     }
 }
