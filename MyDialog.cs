@@ -7,7 +7,7 @@ namespace GTKApp
     class MyDialog : Window
     {
 
-        public MyDialog() : this(new Builder("MyDialog.glade")) { }
+        public MyDialog() : this(new Builder("MyDialog.glade")) { } 
 
         private MyDialog(Builder builder) : base(builder.GetObject("MyDialog").Handle)
         {
