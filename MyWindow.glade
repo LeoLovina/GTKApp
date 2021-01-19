@@ -2,10 +2,37 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
+  <object class="GtkAdjustment" id="adjustment1">
+    <property name="upper">100</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
   <object class="GtkImage" id="imgOnePiece">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
     <property name="stock">gtk-missing-image</property>
+  </object>
+  <object class="GtkListStore" id="liststore1">
+    <columns>
+      <!-- column-name Title -->
+      <column type="gchararray"/>
+      <!-- column-name Id -->
+      <column type="guint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes" context="One">One</col>
+        <col id="1">111</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Two</col>
+        <col id="1">222</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Three</col>
+        <col id="1">333</col>
+      </row>
+    </data>
   </object>
   <object class="GtkWindow" id="MyWindow">
     <property name="can-focus">False</property>
@@ -83,8 +110,8 @@
           </packing>
         </child>
         <child>
-          <!-- n-columns=3 n-rows=3 -->
-          <object class="GtkGrid">
+          <!-- n-columns=3 n-rows=4 -->
+          <object class="GtkGrid" id="gridContainer">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <child>
@@ -99,6 +126,264 @@
                 <property name="left-attach">0</property>
                 <property name="top-attach">0</property>
               </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkRadioButton" id="rbtnYes">
+                    <property name="label" translatable="yes">Yes</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="on_rbtnYes_toggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="rbtnNo">
+                    <property name="label" translatable="yes">No</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">rbtnYes</property>
+                    <signal name="toggled" handler="on_rbtnNo_toggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="rbtnNone">
+                    <property name="label" translatable="yes">None</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">rbtnYes</property>
+                    <signal name="toggled" handler="on_rbtnNone_toggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkCheckButton" id="chkHaha">
+                    <property name="label" translatable="yes">Haha</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="on_chkHaha_toggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToggleButton" id="tgButton">
+                    <property name="label" translatable="yes">toggle button</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <signal name="toggled" handler="on_tgButton_toggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSpinButton" id="spButton">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="adjustment">adjustment1</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="swSwitch">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="active">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="cbCombobox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="model">liststore1</property>
+                <property name="has-entry">True</property>
+                <property name="entry-text-column">0</property>
+                <signal name="changed" handler="on_cbCombobox_changed" object="__glade_unnamed_" swapped="no"/>
+                <child internal-child="entry">
+                  <object class="GtkEntry" id="cbEntry">
+                    <property name="can-focus">False</property>
+                    <property name="placeholder-text" translatable="yes">Please select one item</property>
+                    <signal name="changed" handler="on_cbEntry_changed" swapped="no"/>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="has-entry">True</property>
+                <items>
+                  <item id="A1" translatable="yes">AAA</item>
+                  <item translatable="yes">BBB</item>
+                </items>
+                <child internal-child="entry">
+                  <object class="GtkEntry">
+                    <property name="can-focus">False</property>
+                    <property name="input-purpose">number</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="colorButton">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <signal name="color-set" handler="on_colorButton_color_set" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="fileChoose">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="title" translatable="yes"/>
+                <signal name="file-set" handler="on_fileChoose_file_set" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkVolumeButton" id="btnValume">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="focus-on-click">False</property>
+                <property name="receives-default">True</property>
+                <property name="relief">none</property>
+                <property name="adjustment">adjustment1</property>
+                <property name="icons">audio-volume-muted-symbolic
+audio-volume-high-symbolic
+audio-volume-low-symbolic
+audio-volume-medium-symbolic</property>
+                <child internal-child="plus_button">
+                  <object class="GtkButton">
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="relief">none</property>
+                  </object>
+                </child>
+                <child internal-child="minus_button">
+                  <object class="GtkButton">
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="relief">none</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrollbar">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <!-- n-columns=3 n-rows=3 -->
+          <object class="GtkGrid" id="gridDynamic">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <child>
+              <placeholder/>
             </child>
             <child>
               <placeholder/>
@@ -128,7 +413,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">4</property>
+            <property name="position">5</property>
           </packing>
         </child>
       </object>

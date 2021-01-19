@@ -1,6 +1,7 @@
 using System;
 using Gtk;
 using UI = Gtk.Builder.ObjectAttribute;
+using System.Collections.Generic;
 
 namespace GTKApp
 {
@@ -15,6 +16,13 @@ namespace GTKApp
         [UI] private MenuButton mbtnMenuButton = null;
 
         [UI] private Button btnDialog = null;
+
+        [UI] private SpinButton spButton = null;
+        [UI] private Switch swSwitch = null;
+        [UI] private ComboBox cbCombobox = null;
+
+        [UI] private Grid gridDynamic = null;
+
         private int _counter;
         private uint timeoutHandler;
 
@@ -28,7 +36,9 @@ namespace GTKApp
             _button1.Clicked += Button1_Clicked;
 
             btnDialog.Clicked += btnDialog_clicked;
+            swSwitch.StateChanged += StateChangedHandler;
 
+            SetupCombobox();
             // create a timer to update status bar
             timeoutHandler = GLib.Timeout.Add(1000, new GLib.TimeoutHandler(UpdateStatus));
 
@@ -51,6 +61,15 @@ namespace GTKApp
             // mbtnMenuButton.
         }
 
+        private void SetupCombobox()
+        {
+            List<string> items = new List<string>() { "One", "Two", "Three" };
+            var combo = new ComboBox(items.ToArray());
+            combo.Changed += ComboChangedEventHandler;
+            combo.Show();
+            gridDynamic.Attach(combo, 0, 0, 1, 1);
+            // cbCombobox.Model = items;
+        }
         private bool UpdateStatus()
         {
             var contextId = myStatusbar.GetContextId("message");
@@ -116,7 +135,7 @@ namespace GTKApp
                 checkbox.Show();
                 var lable = new Gtk.Label("NIce label");
                 lable.Show();
-                
+
                 dialog.ContentArea.Add(lable);
                 // dialog.ActionArea.PackStart(checkbox, false, false, 0);
                 //dialog.ActionArea.PackEnd(checkbox, false, false,0);
@@ -125,5 +144,83 @@ namespace GTKApp
             }
         }
 
+        private void on_rbtnYes_toggled(object sender, EventArgs a)
+        {
+            RadioButton rb = sender as RadioButton;
+            Console.WriteLine($"on_rbtnYes_toggled {rb.Active}");
+        }
+
+        private void on_rbtnNo_toggled(object sender, EventArgs a)
+        {
+            RadioButton rb = sender as RadioButton;
+            Console.WriteLine($"on_rbtnNo_toggled {rb.Active}");
+        }
+        private void on_rbtnNone_toggled(object sender, EventArgs a)
+        {
+            RadioButton rb = sender as RadioButton;
+            Console.WriteLine($"on_rbtnNone_toggled {rb.Active}");
+        }
+        private void on_chkHaha_toggled(object sender, EventArgs a)
+        {
+            CheckButton cb = sender as CheckButton;
+            Console.WriteLine($"on_chkHaha_toggled {cb.Active}");
+        }
+        private void on_tgButton_toggled(object sender, EventArgs a)
+        {
+            ToggleButton tg = sender as ToggleButton;
+            Console.WriteLine($"on_tgButton_toggled {tg.Active}");
+            Console.WriteLine($"spButton value: {spButton.Value}");
+            swSwitch.State = !swSwitch.State;
+        }
+
+        // Note: 
+        // StateSetHandler doesn't work propertly
+        // StateChangedHandler is called when the control gets focus.
+        private void StateChangedHandler(object sender, StateChangedArgs args)
+        {
+            Switch sw = sender as Switch;
+            Console.WriteLine($"StateChangedHandler swSwitch State {sw.State}");
+        }
+
+        private void ComboChangedEventHandler(object? sender, EventArgs e)
+        {
+            ComboBox cb = sender as ComboBox;
+            Console.WriteLine($"ComboChangedEventHandler ComboBox seelcted index = {cb.Active}");
+        }
+
+        private void on_cbCombobox_changed(object? sender, EventArgs e)
+        {
+            // https://en.wikibooks.org/wiki/GTK%2B_By_Example/Tree_View/Tree_Models
+            ComboBox cb = sender as ComboBox;
+            Gtk.TreeIter iter;
+            GLib.Value title = new GLib.Value();
+            GLib.Value id = new GLib.Value();
+            var item = cb.Model.IterNthChild(out iter, cb.Active);
+            cb.Model.GetValue(iter, 0, ref title);
+            cb.Model.GetValue(iter, 1, ref id);
+
+            Console.WriteLine($"on_cbCombobox_changed ComboBox selcted index = {cb.Active} title={title.Val} id={id.Val}");
+        }
+        // 
+        private void on_cbEntry_changed(object sender, EventArgs e)
+        {
+            Entry en = sender as Entry;
+            Console.WriteLine($"on_cbEntry_changed ComboBox selcted Text={en.Text}");
+
+        }
+
+        private void on_colorButton_color_set(object sender, EventArgs e)
+        {
+             ColorButton cb = sender as ColorButton;
+             Console.WriteLine($"on_colorButton_color_set ComboBox selcted Blue={cb.Color.Blue}");
+        }
+
+        
+        private void on_fileChoose_file_set(object sender, EventArgs e)
+        {
+             FileChooserButton file = sender as FileChooserButton;
+             Console.WriteLine($"on_fileChoose_file_set file ={file.File}");
+        }
+        // 
     }
 }
