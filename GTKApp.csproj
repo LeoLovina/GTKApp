@@ -16,4 +16,10 @@
     <PackageReference Include="GtkSharp" Version="3.22.25.*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Assests\onepiece.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
