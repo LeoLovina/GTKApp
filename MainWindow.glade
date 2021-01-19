@@ -172,11 +172,22 @@
         </child>
         <child>
           <object class="GtkButton" id="btnTest">
-            <property name="label" translatable="yes">button</property>
+            <property name="use-action-appearance">True</property>
+            <property name="height-request">69</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
-            <signal name="clicked" handler="btnTest_clicked" swapped="no"/>
+            <property name="tooltip-text" translatable="yes">This is a test</property>
+            <property name="always-show-image">True</property>
+            <signal name="clicked" handler="on_btnTest_clicked" swapped="no"/>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="pixbuf">Assests\onepiece.jpg</property>
+                <property name="icon_size">5</property>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>

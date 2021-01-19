@@ -20,7 +20,6 @@ namespace GTKApp
             builder.Autoconnect(this);
 
             DeleteEvent += Window_DeleteEvent;
-          //  _button1.Clicked += Button1_Clicked;
         }
 
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
@@ -33,15 +32,15 @@ namespace GTKApp
             Console.WriteLine("mniOpen_Click");
         }
 
-        private void btnTest_clicked(object sender, EventArgs a)
+        private void on_btnTest_clicked(object sender, EventArgs a)
         {
 
-            var myDialog = new MyDialog();
-            myDialog.Show();
-            MainBox.Add(myDialog);
-            // var myWindow = new MyWindow();
-            // myWindow.Show();
-            // MainBox.Add(myWindow);
+            // var myDialog = new MyDialog();
+            // myDialog.Show();
+            // MainBox.Add(myDialog);
+            var myWindow = new MyWindow();
+            myWindow.Show();
+            MainBox.Add(myWindow);
 
             // _counter++;
             // _label1.Text = "Hello World! This button has been clicked " + _counter + " time(s).";
