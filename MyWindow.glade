@@ -472,27 +472,63 @@ audio-volume-medium-symbolic</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <child>
-                      <object class="GtkLabel" id="lbColor">
-                        <property name="name">lbColor</property>
+                      <object class="GtkFrame">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">I am Label</property>
+                        <property name="label-xalign">0</property>
+                        <property name="shadow-type">in</property>
+                        <child>
+                          <object class="GtkAlignment">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="left-padding">12</property>
+                            <child>
+                              <object class="GtkFixed">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <child>
+                                  <object class="GtkLabel" id="lbColor">
+                                    <property name="name">lbColor</property>
+                                    <property name="width-request">100</property>
+                                    <property name="height-request">80</property>
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label" translatable="yes">I am Label</property>
+                                  </object>
+                                  <packing>
+                                    <property name="x">31</property>
+                                    <property name="y">26</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkColorButton" id="btnColor">
+                                    <property name="width-request">100</property>
+                                    <property name="height-request">80</property>
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">True</property>
+                                    <signal name="color-set" handler="on_btnColor_color_set" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="x">236</property>
+                                    <property name="y">74</property>
+                                  </packing>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child type="label">
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="label" translatable="yes">This is frame title</property>
+                          </object>
+                        </child>
                       </object>
                       <packing>
-                        <property name="x">27</property>
-                        <property name="y">40</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkColorButton" id="btnColor">
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">True</property>
-                        <signal name="color-set" handler="on_btnColor_color_set" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="x">140</property>
-                        <property name="y">40</property>
+                        <property name="x">1</property>
+                        <property name="y">1</property>
                       </packing>
                     </child>
                   </object>
