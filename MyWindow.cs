@@ -73,11 +73,11 @@ namespace GTKApp
 
         private void SetupButton()
         {
-            Box box = new Box(Orientation.Vertical,2);
+            Box box = new Box(Orientation.Vertical, 2);
             Button btn1 = new Button("gtk-about");
             box.Add(btn1);
             box.ShowAll();
-            gridDynamic.Attach(box, 1,0,1,1);
+            gridDynamic.Attach(box, 1, 0, 1, 1);
         }
         private bool UpdateStatus()
         {
@@ -107,7 +107,6 @@ namespace GTKApp
 
         private void btnTest_Clicked(object sender, EventArgs a)
         {
-            FindChild("haha");
             Gtk.Application.Invoke(
                 delegate
                 {
@@ -116,12 +115,18 @@ namespace GTKApp
             );
         }
 
-        private void FindChild(string id)
+        private Widget FindChild(Container container, string widgetName)
         {
-            foreach (var child in MainBox.Children)
+            Widget result = null;
+            foreach (var child in container.Children)
             {
-                Console.WriteLine($"Name = {child.Name}");
+                if (child.Name == widgetName)
+                {
+                    result = child;
+                    break;
+                }
             }
+            return result;
         }
 
         private void mbtnMenuButton_clicked(object sender, EventArgs a)
@@ -219,22 +224,36 @@ namespace GTKApp
 
         private void on_colorButton_color_set(object sender, EventArgs e)
         {
-             ColorButton cb = sender as ColorButton;
-             Console.WriteLine($"on_colorButton_color_set ComboBox selcted Blue={cb.Color.Blue}");
+            ColorButton cb = sender as ColorButton;
+            Console.WriteLine($"on_colorButton_color_set ComboBox selcted Blue={cb.Color.Blue}");
         }
 
-        
+
         private void on_fileChoose_file_set(object sender, EventArgs e)
         {
-             FileChooserButton file = sender as FileChooserButton;
-             Console.WriteLine($"on_fileChoose_file_set file ={file.File}");
+            FileChooserButton file = sender as FileChooserButton;
+            Console.WriteLine($"on_fileChoose_file_set file ={file.File}");
         }
         //  
 
         private void on_actAlert_activate(object sender, EventArgs e)
         {
-//             FileChooserButton file = sender as FileChooserButton;
-             Console.WriteLine($"on_actAlert_activate ");
+            //             FileChooserButton file = sender as FileChooserButton;
+            Console.WriteLine($"on_actAlert_activate ");
+        }
+
+        //private void on_btnColor_color_set(object sender, EventArgs e)
+        private void on_btnColor_color_set(object sender, EventArgs e)
+        {
+            ColorButton btn = sender as ColorButton;
+            var rgba = btn.Rgba;
+            var parent = btn.Parent;
+            var parentFix = btn.Parent as Fixed;
+            var lbColor = FindChild(parentFix, "lbColor"); 
+            if (lbColor != null)
+                lbColor.ModifyBg(StateType.Normal, new Gdk.Color() { Red = (ushort)rgba.Red, Green = (ushort)rgba.Green, Blue = (ushort)rgba.Blue });
+            parent.ModifyBg(StateType.Normal, new Gdk.Color() { Red = (ushort)rgba.Red, Green = (ushort)rgba.Green, Blue = (ushort)rgba.Blue });
+            Console.WriteLine($"on_btnColor_color_set {rgba.Red} {rgba.Green} {rgba.Blue} {rgba.Alpha}");
         }
 
     }
