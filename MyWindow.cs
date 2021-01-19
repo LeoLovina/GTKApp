@@ -39,6 +39,7 @@ namespace GTKApp
             swSwitch.StateChanged += StateChangedHandler;
 
             SetupCombobox();
+            SetupButton();
             // create a timer to update status bar
             timeoutHandler = GLib.Timeout.Add(1000, new GLib.TimeoutHandler(UpdateStatus));
 
@@ -68,7 +69,15 @@ namespace GTKApp
             combo.Changed += ComboChangedEventHandler;
             combo.Show();
             gridDynamic.Attach(combo, 0, 0, 1, 1);
-            // cbCombobox.Model = items;
+        }
+
+        private void SetupButton()
+        {
+            Box box = new Box(Orientation.Vertical,2);
+            Button btn1 = new Button("gtk-about");
+            box.Add(btn1);
+            box.ShowAll();
+            gridDynamic.Attach(box, 1,0,1,1);
         }
         private bool UpdateStatus()
         {
@@ -206,7 +215,6 @@ namespace GTKApp
         {
             Entry en = sender as Entry;
             Console.WriteLine($"on_cbEntry_changed ComboBox selcted Text={en.Text}");
-
         }
 
         private void on_colorButton_color_set(object sender, EventArgs e)
@@ -221,6 +229,13 @@ namespace GTKApp
              FileChooserButton file = sender as FileChooserButton;
              Console.WriteLine($"on_fileChoose_file_set file ={file.File}");
         }
-        // 
+        //  
+
+        private void on_actAlert_activate(object sender, EventArgs e)
+        {
+//             FileChooserButton file = sender as FileChooserButton;
+             Console.WriteLine($"on_actAlert_activate ");
+        }
+
     }
 }
