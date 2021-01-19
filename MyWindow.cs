@@ -249,11 +249,24 @@ namespace GTKApp
             var rgba = btn.Rgba;
             var parent = btn.Parent;
             var parentFix = btn.Parent as Fixed;
-            var lbColor = FindChild(parentFix, "lbColor"); 
+            var lbColor = FindChild(parentFix, "lbColor");
             if (lbColor != null)
                 lbColor.ModifyBg(StateType.Normal, new Gdk.Color() { Red = (ushort)rgba.Red, Green = (ushort)rgba.Green, Blue = (ushort)rgba.Blue });
             parent.ModifyBg(StateType.Normal, new Gdk.Color() { Red = (ushort)rgba.Red, Green = (ushort)rgba.Green, Blue = (ushort)rgba.Blue });
             Console.WriteLine($"on_btnColor_color_set {rgba.Red} {rgba.Green} {rgba.Blue} {rgba.Alpha}");
+        }
+
+        // 
+        private void on_btnOpenImage_file_set(object sender, EventArgs e)
+        {
+            FileChooserButton btnOpenFile = sender as FileChooserButton;
+            Console.WriteLine($"on_btnOpenImage_file_set file{btnOpenFile.File}");
+            var parent = btnOpenFile.Parent as Container;
+            var fixImage = FindChild(parent, "fixImage") as Fixed;
+            var image = new Image();
+            image.File = btnOpenFile.File.Path;
+            image.Show();
+            fixImage.Put(image, 0 + 20 * fixImage.Children.Length, 0);
         }
 
     }
